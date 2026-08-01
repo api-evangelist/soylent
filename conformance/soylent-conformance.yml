@@ -1,0 +1,41 @@
+generated: '2026-07-21'
+method: searched
+source: >-
+  https://soylent.com/.well-known/ucp,
+  https://soylent.com/.well-known/openid-configuration,
+  https://soylent.com/.well-known/oauth-authorization-server
+notes: >-
+  Cross-cutting standards Soylent's public agent-commerce surface conforms to,
+  read from its live discovery documents (Shopify platform). Evidence is the
+  well-known documents captured in this repo.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      /.well-known/oauth-authorization-server advertises authorization_code +
+      refresh_token grants with client_secret_basic token auth.
+  - id: oidc
+    conforms: true
+    evidence: >-
+      /.well-known/openid-configuration issuer shopify.com/authentication with
+      RS256 id_token signing, jwks_uri, and OIDC claims.
+  - id: oauth2-pkce
+    conforms: true
+    evidence: code_challenge_methods_supported includes S256.
+  - id: rfc8414-oauth-metadata
+    conforms: true
+    evidence: /.well-known/oauth-authorization-server (RFC 8414) returns 200.
+  - id: ucp
+    conforms: true
+    evidence: >-
+      /.well-known/ucp merchant profile advertises the dev.ucp.shopping service
+      (versions 2026-04-08, 2026-01-23) with an MCP transport endpoint.
+  - id: mcp
+    conforms: true
+    evidence: >-
+      /api/ucp/mcp is a live UCP shopping MCP endpoint (JSON-RPC); tools are
+      documented in /llms.txt and /.well-known/ucp capabilities.
+  - id: rfc9457-problem-details
+    conforms: false
+  - id: fhir-r4
+    conforms: false

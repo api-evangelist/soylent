@@ -1,0 +1,45 @@
+generated: '2026-07-21'
+method: searched
+source: https://soylent.com/llms.txt; https://soylent.com/.well-known/ucp
+scope: >-
+  Cross-cutting semantics for Soylent's agent-commerce surface (Universal Commerce
+  Protocol over MCP) and the read-only Shopify storefront endpoints. Derived from
+  the provider's published agent instructions; no idempotency contract is
+  documented.
+authentication:
+  agent_commerce: UCP agent-profile URI required before the MCP endpoint enumerates tools.
+  customer: OAuth2 / OIDC authorization-code + PKCE (S256) via account.soylent.com.
+  read_only_browsing: none required (public product/collection JSON).
+versioning:
+  scheme: date-based UCP protocol versions
+  current: '2026-04-08'
+  also_supported: ['2026-01-23']
+  negotiation: client selects a supported_version from /.well-known/ucp
+error_envelope:
+  style: JSON-RPC 2.0
+  example_code: -32001
+  example_message: UCP discovery failed
+rate_limiting:
+  signal: HTTP 429
+  guidance: MCP endpoint is rate-limited per IP; agents must back off on 429.
+buyer_context:
+  params:
+  - context.address_country
+  - context.currency
+  note: pass buyer context for accurate pricing and availability.
+human_in_the_loop:
+  checkout: Payment completion requires contemporaneous explicit buyer approval; agents must not complete payment autonomously.
+idempotency:
+  documented: false
+  note: No idempotency-key header or contract is published for the UCP/MCP surface.
+read_only_endpoints:
+- GET /collections/all
+- GET /products/{handle}.json
+- GET /collections/{handle}/products.json
+- GET /search?q={query}&type=product
+- GET /sitemap.xml
+cross_references:
+  authentication: authentication/soylent-authentication.yml
+  scopes: scopes/soylent-scopes.yml
+  mcp: mcp/soylent-mcp.yml
+  conformance: conformance/soylent-conformance.yml
