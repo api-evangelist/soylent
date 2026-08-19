@@ -2,65 +2,63 @@ generated: '2026-07-21'
 method: searched
 status: published
 source: https://soylent.com/.well-known/ucp
-notes: >-
-  Soylent runs a live Shopify Universal Commerce Protocol (UCP) MCP server for
-  agent-driven commerce. The store advertises the server in its /llms.txt and
-  /.well-known/ucp merchant profile. The MCP transport endpoint is
-  POST https://soylent.com/api/ucp/mcp (JSON-RPC over HTTP, Content-Type:
-  application/json). Unlike the older Shopify /api/mcp storefront server (which
-  returns 404 here), Soylent exposes only the UCP-branded shopping MCP; a live
-  tools/list requires the UCP agent-profile handshake, so the tool list below is
-  taken verbatim from the documented "Typical Agent Flow" in /llms.txt and the
-  UCP shopping capabilities in /.well-known/ucp (not fabricated, not
-  live-enumerated).
+notes: 'Soylent runs a live Shopify Universal Commerce Protocol (UCP) MCP server for agent-driven commerce.
+  The store advertises the server in its /llms.txt and /.well-known/ucp merchant profile. The MCP transport
+  endpoint is POST https://soylent.com/api/ucp/mcp (JSON-RPC over HTTP, Content-Type: application/json).
+  Unlike the older Shopify /api/mcp storefront server (which returns 404 here), Soylent exposes only the
+  UCP-branded shopping MCP; a live tools/list requires the UCP agent-profile handshake, so the tool list
+  below is taken verbatim from the documented "Typical Agent Flow" in /llms.txt and the UCP shopping capabilities
+  in /.well-known/ucp (not fabricated, not live-enumerated).'
 server:
   name: soylent
   vendor: Shopify (UCP storefront commerce)
   transport: http
   protocol: mcp
-  # UCP shopping service MCP endpoint (from /llms.txt and /.well-known/ucp)
   url: https://soylent.com/api/ucp/mcp
   ucp_endpoint: https://soylent-prod.myshopify.com/api/ucp/mcp
   discovery: https://soylent.com/.well-known/ucp
   agent_instructions: https://soylent.com/llms.txt
   auth:
-    read_only: none            # search/browse tools need no auth
-    transacting: buyer-approved # checkout/payment requires explicit human approval
+    read_only: none
+    transacting: buyer-approved
   ucp_versions:
-    - '2026-04-08'
-    - '2026-01-23'
+  - '2026-04-08'
+  - '2026-01-23'
 tools:
-  - name: search_catalog
-    description: >-
-      Find products matching the buyer's intent. Conforms to the UCP catalog
-      search capability (dev.ucp.shopping.catalog.search).
-    source: llms.txt Typical Agent Flow (step 2)
-  - name: create_cart
-    description: >-
-      Create a cart and add desired items (dev.ucp.shopping.cart).
-    source: llms.txt Typical Agent Flow (step 3)
-  - name: create_checkout
-    description: >-
-      Start the purchase flow for a cart (dev.ucp.shopping.checkout).
-    source: llms.txt Typical Agent Flow (step 4)
-  - name: update_checkout
-    description: >-
-      Set shipping address and method on a checkout (dev.ucp.shopping.fulfillment).
-    source: llms.txt Typical Agent Flow (step 5)
-  - name: complete_checkout
-    description: >-
-      Finalize the purchase. Requires explicit buyer approval of payment.
-    source: llms.txt Typical Agent Flow (step 6)
+- name: search_catalog
+  description: Find products matching the buyer's intent. Conforms to the UCP catalog search capability
+    (dev.ucp.shopping.catalog.search).
+  source: llms.txt Typical Agent Flow (step 2)
+- name: create_cart
+  description: Create a cart and add desired items (dev.ucp.shopping.cart).
+  source: llms.txt Typical Agent Flow (step 3)
+- name: create_checkout
+  description: Start the purchase flow for a cart (dev.ucp.shopping.checkout).
+  source: llms.txt Typical Agent Flow (step 4)
+- name: update_checkout
+  description: Set shipping address and method on a checkout (dev.ucp.shopping.fulfillment).
+  source: llms.txt Typical Agent Flow (step 5)
+- name: complete_checkout
+  description: Finalize the purchase. Requires explicit buyer approval of payment.
+  source: llms.txt Typical Agent Flow (step 6)
 capabilities:
-  - dev.ucp.shopping.checkout
-  - dev.ucp.shopping.fulfillment
-  - dev.ucp.shopping.discount
-  - dev.ucp.shopping.cart
-  - dev.ucp.shopping.order
-  - dev.ucp.shopping.catalog.search
-  - dev.ucp.shopping.catalog.lookup
-  - dev.shopify.catalog
+- dev.ucp.shopping.checkout
+- dev.ucp.shopping.fulfillment
+- dev.ucp.shopping.discount
+- dev.ucp.shopping.cart
+- dev.ucp.shopping.order
+- dev.ucp.shopping.catalog.search
+- dev.ucp.shopping.catalog.lookup
+- dev.shopify.catalog
 payment_handlers:
-  - com.google.pay
-  - dev.shopify.card
-  - dev.shopify.shop_pay
+- com.google.pay
+- dev.shopify.card
+- dev.shopify.shop_pay
+deployment:
+  mode: remote
+  endpoint: https://soylent.com/api/ucp/mcp
+  verified: probed
+  probe: live
+  tools: 13
+  checked: '2026-08-12'
+  source: catalog MCP census
