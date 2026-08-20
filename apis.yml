@@ -41,6 +41,19 @@ tags:
 - Nutrition
 - Food and Beverage
 - Meal Replacement
+- E-Commerce
+- Retail
+- Direct to Consumer
+- Agent Commerce
+- Universal Commerce Protocol
+- Shopify
+- MCP
+tags_raw:
+- Company
+- Consumer
+- Nutrition
+- Food and Beverage
+- Meal Replacement
 - Ecommerce
 - Retail
 - Direct-to-Consumer
@@ -59,6 +72,11 @@ apis:
   humanURL: https://soylent.com/llms.txt
   baseURL: https://soylent.com/api/ucp/mcp
   tags:
+  - Agent Commerce
+  - MCP
+  - Universal Commerce Protocol
+  - E-Commerce
+  tags_raw:
   - Agent Commerce
   - MCP
   - Universal Commerce Protocol
