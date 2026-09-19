@@ -55,7 +55,7 @@ tags:
 - E-Commerce
 - Retail
 - Direct to Consumer
-- Agent Commerce
+- Agentic Commerce
 - Universal Commerce Protocol
 - Shopify
 - MCP
@@ -83,7 +83,7 @@ apis:
   humanURL: https://soylent.com/llms.txt
   baseURL: https://soylent.com/api/ucp/mcp
   tags:
-  - Agent Commerce
+  - Agentic Commerce
   - MCP
   - Universal Commerce Protocol
   - E-Commerce
