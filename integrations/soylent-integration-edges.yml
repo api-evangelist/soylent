@@ -1,0 +1,16 @@
+generated: '2026-10-12'
+method: none
+source:
+- https://zapier.com/apps/soylent/integrations
+- https://n8n.io/integrations/soylent/
+- https://composio.dev/toolkits/soylent
+- https://monid.ai/tools/soylent
+checked:
+- https://composio.dev/toolkits/soylent
+- https://monid.ai/tools/soylent
+- https://n8n.io/integrations/soylent/
+- https://zapier.com/apps/soylent/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
